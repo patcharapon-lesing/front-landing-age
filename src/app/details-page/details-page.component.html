@@ -1,0 +1,57 @@
+<div class="table-overflow">
+    <div class="responsive-table ">
+        <table id="report" datatable class="textview text-center">
+            <thead>
+                <tr>
+                    <th *ngFor="let loopdata of headers" class="textview">{{ loopdata }}</th>
+                </tr>
+                <!-- style="background-color: rgb(238, 238, 238);" -->
+            </thead>
+            <tbody>
+                <tr *ngFor="let loopdata of data">
+                    <td class="textview"><b>{{ loopdata.No}}</b></td>
+                    <td class="textview">{{ loopdata.caseID }}</td>
+                    <td class="textview ">{{ loopdata.topic }}</td>
+                    <td class="textview ">{{ loopdata.description }}</td>
+                    <td class="textview ">{{ loopdata.createDate }}</td>
+                    <td class="textview ">{{ loopdata.caseBy }}</td>
+                    <td class="textview ">{{ loopdata.statusCase }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- </div>
+
+<div class=" footer" style="margin-bottom: 3%; margin-top: 3%;  ">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
+
+            <div class="row" style="margin: auto;">
+                <div class="col-6">
+                    <button type="button" class="btn-light  btnSarchCase" (click)="butGoFindCasePage()"><span>Back</span></button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn-light color-ais btnSarchCase" (click)="butExportAsXLSX()"><span>Export</span></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-md-6 col-lg-7 col-xl-8"></div>
+                <div class="col-sm-12 col-md-5 col-lg-5 col-xl-3 " style="width: 100%;">
+                    <div class="row" style=" margin-left: 5%; margin-right: 5%; ">
+                        <div class="col-6">
+                            <button type="button" class="btn-light  btnSarchCase" (click)="butGoFindCasePage()"><span>Back</span></button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn-light color-ais btnSarchCase" (click)="butExportAsXLSX()"><span>Export</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 col-lg-1 col-xl-1"></div>
+
+            </div>
+        </div>

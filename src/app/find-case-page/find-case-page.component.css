@@ -1,0 +1,154 @@
+.btnAlert {
+    margin-left: 3%;
+    width: 30%;
+    height: 100%;
+    border: 3;
+    border-color: black;
+    box-shadow: 0 8px 16px 0 rgba(100, 97, 97, 0.2), 0 2px 2px 0 rgba(32, 32, 32, 0.19);
+    padding: 8px 3px;
+    font-size: 14px;
+    border-radius: 4px;
+    float: right;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 3%;
+}
+
+.divCase {
+    padding: 20px 10px 40px 10px;
+    background-color: rgb(247, 247, 247);
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    border-radius: 4px;
+}
+
+.divSearch {
+    height: 100%;
+    /* padding: 10px 10px 10px 10px; */
+    background-color: rgb(247, 247, 247);
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    border-radius: 6px;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+.glyphiconSize {
+    font-size: 20px;
+}
+
+.btnCase {
+    width: 100%;
+    height: 140%;
+    border: 2;
+    border-color: black;
+    box-shadow: 0 8px 16px 0 rgba(100, 97, 97, 0.2), 0 2px 2px 0 rgba(32, 32, 32, 0.19);
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.btnSarchCase {
+    width: 100%;
+    height: 100%;
+    border: 3;
+    border-color: black;
+    box-shadow: 0 8px 16px 0 rgba(100, 97, 97, 0.2), 0 2px 2px 0 rgba(32, 32, 32, 0.19);
+    padding: 10px 3px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.btnSubmit {
+    margin-top: 15%;
+    margin-left: 3%;
+    width: 30%;
+    height: 100%;
+    border: 3;
+    border-color: black;
+    box-shadow: 0 8px 16px 0 rgba(100, 97, 97, 0.2), 0 2px 2px 0 rgba(32, 32, 32, 0.19);
+    padding: 8px 3px;
+    font-size: 14px;
+    border-radius: 4px;
+    /* margin-right: 3%; */
+    float: right;
+}
+
+.right {
+    float: right;
+}
+
+.center {
+    padding: 20hpx 0;
+    text-align: center;
+}
+
+
+/* Darker background on mouse-over */
+
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+.color-ais {
+    background: white;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #c9e557, #6bc60f);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #c9e557, #6bc60f);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #c9e557, #6bc60f);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #c9e557, #6bc60f);
+    /* Standard syntax (must be last) */
+}
+
+@media only screen and (max-width: 600px) {
+    /* hide it elsewhere */
+    .responsive {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1024px) {
+    .responsive {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1600px) {
+    .responsive {
+        width: 40%;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .responsive {
+        width: 30%;
+        margin: auto;
+    }
+}
