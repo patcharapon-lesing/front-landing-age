@@ -46,7 +46,9 @@ export class FindCasePageComponent implements OnInit {
     let dateFrom = (document.getElementById('dateFrom') as HTMLInputElement).value
     let dateTo = (document.getElementById('dateTo') as HTMLInputElement).value
     let filesname = "";
-    if (!caseId) { filesname = caseId } else {
+    if ((document.getElementById('caseId') as HTMLInputElement).value.length !== 0) { 
+      filesname = caseId
+     } else {
       filesname = dateFrom + "-" + dateTo;
     }
     this.excelService.excelFileName = filesname;
@@ -128,6 +130,7 @@ export class FindCasePageComponent implements OnInit {
     let element: HTMLInputElement = document.getElementById('callAlert') as HTMLInputElement ;
     element.style.display = "block" ;
     element.click();
+    this.alertLoading(false);
   }
 
   alertLoading(val: boolean):void {

@@ -99,6 +99,7 @@ export class CreateCasePageComponent implements OnInit {
 
   msg: string;
   alertCalling(msg: string): void {
+    this.alertLoading(false);
     this.msg = msg;
     let element: HTMLInputElement = document.getElementById('callAlert') as HTMLInputElement;
     element.style.display = "block";

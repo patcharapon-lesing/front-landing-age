@@ -1,21 +1,21 @@
 <div class="table-overflow">
     <div class="responsive-table ">
-        <table id="report" datatable class="textview text-center">
+        <table id="report" datatable class=" text-center">
             <thead>
                 <tr>
-                    <th *ngFor="let loopdata of headers" class="textview">{{ loopdata }}</th>
+                    <th *ngFor="let loopdata of headers" class="">{{ loopdata }}</th>
                 </tr>
                 <!-- style="background-color: rgb(238, 238, 238);" -->
             </thead>
             <tbody>
                 <tr *ngFor="let loopdata of data">
-                    <td class="textview"><b>{{ loopdata.No}}</b></td>
-                    <td class="textview">{{ loopdata.caseID }}</td>
-                    <td class="textview ">{{ loopdata.topic }}</td>
-                    <td class="textview ">{{ loopdata.description }}</td>
-                    <td class="textview ">{{ loopdata.createDate }}</td>
-                    <td class="textview ">{{ loopdata.caseBy }}</td>
-                    <td class="textview ">{{ loopdata.statusCase }}</td>
+                    <td class=""><b>{{ loopdata.No}}</b></td>
+                    <td class="">{{ loopdata.caseID }}</td>
+                    <td class=" ">{{ loopdata.topic }}</td>
+                    <td class=" ">{{ loopdata.description }}</td>
+                    <td class=" ">{{ loopdata.createDate }}</td>
+                    <td class=" ">{{ loopdata.caseBy }}</td>
+                    <td class=" ">{{ loopdata.statusCase }}</td>
                 </tr>
             </tbody>
         </table>

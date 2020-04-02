@@ -17,8 +17,7 @@ export class AppComponent {
   setTheme('bs4'); // or 'bs3'
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onClickBackNav(): void {
     this.router.navigate(['']);
