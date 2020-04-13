@@ -10,7 +10,6 @@ export class ExcelService {
   excelFileName = "";
   constructor() { }
 
-
   public exportAsExcelFile( headerTb: any[], json: any[], excelFileName: string): void {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([], { header: headerTb  });
     XLSX.utils.sheet_add_json(ws , json, {skipHeader: true, origin: 'A2'} );
@@ -25,7 +24,5 @@ export class ExcelService {
     });
      FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
   }
-
-  
 
 }

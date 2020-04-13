@@ -1,5 +1,5 @@
 <div class="responsive">
-    <div class="divCase">
+    <div class="divCase card">
         <div class="row ">
             <div class="col-xs-6 ">
                 <button type="button" class="  btn-light btnCase" (click)="butGoFindCasePage()">
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="divCreateCase ">
+    <div class="divCreateCase card ">
         <span> &nbsp; สร้างเคสใหม่ (ระบุข้อมูลให้ครบถ้วน) </span>
         <hr>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -43,32 +43,31 @@
                     <div *ngIf="submitted && f.caseBy.errors" class="invalid-feedback">
                         <div *ngIf="f.caseBy.errors.required">โปรดระบุ..</div>
                         <div *ngIf="f.caseBy.errors.minlength">กรอกข้อมูล 2 ตัวขึ้นไป</div>
-                        <div *ngIf="f.caseBy.errors.maxlength">จำกัด 50 ตัวอักษร</div>
+                        <div *ngIf="f.caseBy.errors.maxlength">จำกัด 80 ตัวอักษร</div>
                     </div>
                     <input type="text" formControlName="topic" class="form-control inputText1" placeholder="Topic" [ngClass]="{ 'is-invalid': submitted && f.topic.errors }" />
                     <div *ngIf="submitted && f.topic.errors" class="invalid-feedback">
                         <div *ngIf="f.topic.errors.required">โปรดระบุ..</div>
                         <div *ngIf="f.topic.errors.minlength">กรอกข้อมูล 2 ตัวขึ้นไป</div>
-                        <div *ngIf="f.topic.errors.maxlength">จำกัด 50 ตัวอักษร</div>
+                        <div *ngIf="f.topic.errors.maxlength">จำกัด 80 ตัวอักษร</div>
                     </div>
                     <input type="text" formControlName="description" class="form-control inputText1" placeholder="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
                     <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                         <div *ngIf="f.description.errors.required">โปรดระบุ..</div>
                         <div *ngIf="f.description.errors.minlength">กรอกข้อมูล 2 ตัวขึ้นไป</div>
-                        <div *ngIf="f.description.errors.maxlength">จำกัด 50 ตัวอักษร</div>
+                        <div *ngIf="f.description.errors.maxlength">จำกัด 100 ตัวอักษร</div>
                     </div>
                     <select type="text" formControlName="statusCase" class="form-control inputText1" value="" placeholder="Create case by" [ngClass]="{ 'is-invalid': submitted && f.statusCase.errors }">
                         <option value="">Selete Case</option>
-                        <option value="immediately">1. Immediately (I)</option>
+                        <option value="Immediately">1. Immediately (I)</option>
                         <option value="Urgent">2. Urgent (U)</option>
-                        <option value="Nurmal">3. Nurmal (N)</option>
+                        <option value="Normal">3. Normal (N)</option>
                     </select>
                     <div *ngIf="submitted && f.statusCase.errors" class="invalid-feedback">
                         <div *ngIf="f.statusCase.errors.required">โปรดระบุ..</div>
                     </div>
                 </div>
             </div>
-
             <div class="divSubmitCase">
                 <button type="button" class="btn-light btnSubmit" (click)="clearFrom()">
                     <span>Clear</span>
@@ -107,14 +106,13 @@
 </div>
 <!-- modal -->
 
-
 <!-- modal Alert-->
 <input type="button" id="callAlert" name="callAlert" onclick="document.getElementById('modalAlert').style.display='block'" hidden>
 <div id="modalAlert" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px; max-height: 400px; margin-top: auto;">
         <header class="w3-container color-ais">
             <span onclick="document.getElementById('modalAlert').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h3>Messeng</h3>
+            <h3>Message</h3>
         </header>
         <div class="w3-center"><br>
             <div style=" max-height: 200px; overflow-x: scroll;">
@@ -133,10 +131,8 @@
 <!-- modal Alert-->
 
 <!-- modal loadling -->
-<input type="button" id="modalLoading" name="modalLoading"
-    onclick="document.getElementById('modalLoad').style.display='block'" hidden >
-<input type="button" id="closeModalLoading" name="closeModalLoading"
-    onclick="document.getElementById('modalLoad').style.display='none'" hidden>
+<input type="button" id="modalLoading" name="modalLoading" onclick="document.getElementById('modalLoad').style.display='block'" hidden>
+<input type="button" id="closeModalLoading" name="closeModalLoading" onclick="document.getElementById('modalLoad').style.display='none'" hidden>
 
 <div id="modalLoad" class="w3-modal">
     <div class="text-center" style="margin-top: 30%">

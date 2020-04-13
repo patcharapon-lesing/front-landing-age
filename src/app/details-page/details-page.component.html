@@ -1,57 +1,202 @@
-<div class="table-overflow">
-    <div class="responsive-table ">
-        <table id="report" datatable class=" text-center">
-            <thead>
-                <tr>
-                    <th *ngFor="let loopdata of headers" class="">{{ loopdata }}</th>
-                </tr>
-                <!-- style="background-color: rgb(238, 238, 238);" -->
-            </thead>
-            <tbody>
-                <tr *ngFor="let loopdata of data">
-                    <td class=""><b>{{ loopdata.No}}</b></td>
-                    <td class="">{{ loopdata.caseID }}</td>
-                    <td class=" ">{{ loopdata.topic }}</td>
-                    <td class=" ">{{ loopdata.description }}</td>
-                    <td class=" ">{{ loopdata.createDate }}</td>
-                    <td class=" ">{{ loopdata.caseBy }}</td>
-                    <td class=" ">{{ loopdata.statusCase }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- </div>
-
-<div class=" footer" style="margin-bottom: 3%; margin-top: 3%;  ">
-    <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
-
-            <div class="row" style="margin: auto;">
-                <div class="col-6">
-                    <button type="button" class="btn-light  btnSarchCase" (click)="butGoFindCasePage()"><span>Back</span></button>
-                </div>
-                <div class="col-6">
-                    <button type="button" class="btn-light color-ais btnSarchCase" (click)="butExportAsXLSX()"><span>Export</span></button>
+<button (click)="reloadCard()" id="clickReloadCard" name="clickReloadCard" hidden>clickReloadCard</button>
+<div class="display-card-data" *ngIf="showCard">
+    <div class="gradNavResponsive" style="font-size: 10px ">
+        <div class="row" style="margin: 0;">
+            <div class="col-9">
+                <div class="input-group">
+                    <input (change)="secrchCard()" [(ngModel)]="secrchVal" type="text" class=" form-control" placeholder="Search | CaseID,Date Create" style="border-radius:20px; height: 5%; font-size: 10px;margin-left: 7%; ">
                 </div>
             </div>
-        </div>
+            <div class="col-2" style="padding: 0;">
+                <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn" (click)="butExportAsXLSX()" style=" color: rgb(117, 117, 117) ; font-size: 15px; padding: 0px; ">
+                            <i class="glyphicon glyphicon-download-alt"></i> 
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <div ngbDropdown class="d-inline-block " style="margin: auto;">
+                            <button style=" color: rgb(117, 117, 117) ; font-size: 15px; padding: 0px; " class="btn " id="dropdownBasic1" ngbDropdownToggle>
+                                <i class="glyphicon glyphicon-menu-hamburger"></i> 
+                            </button>
 
-    </div>
-</div> -->
-
-        <div class="footer">
-            <div class="row">
-                <div class="col-md-6 col-lg-7 col-xl-8"></div>
-                <div class="col-sm-12 col-md-5 col-lg-5 col-xl-3 " style="width: 100%;">
-                    <div class="row" style=" margin-left: 5%; margin-right: 5%; ">
-                        <div class="col-6">
-                            <button type="button" class="btn-light  btnSarchCase" (click)="butGoFindCasePage()"><span>Back</span></button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn-light color-ais btnSarchCase" (click)="butExportAsXLSX()"><span>Export</span></button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="font-size: 12px;">
+                                <button *ngIf="!buttonSort.caseID" ngbDropdownItem (click)="sortData('caseID',false); buttonSort['caseID']= true " style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-up"></i>&ensp;Sort by : CaseID </button>
+                                <button *ngIf="buttonSort.caseID" ngbDropdownItem (click)="sortData('caseID',true); buttonSort['caseID']= false" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-down"></i>&ensp;Sort by : caseID </button>
+                                <button *ngIf="!buttonSort.topic" ngbDropdownItem (click)="sortData('topic',false);  buttonSort['topic']= true" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-up"></i>&ensp;Sort by : Topic </button>
+                                <button *ngIf="buttonSort.topic" ngbDropdownItem (click)="sortData('topic',true);  buttonSort['topic']= false" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-down"></i>&ensp;Sort by : Topic </button>
+                                <button *ngIf="!buttonSort.statusCase" ngbDropdownItem (click)="sortData('statusCase',false);  buttonSort['statusCase']= true" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-up"></i>&ensp;Sort by : Status </button>
+                                <button *ngIf="buttonSort.statusCase" ngbDropdownItem (click)="sortData('statusCase',true);  buttonSort['statusCase']= false" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-down"></i>&ensp;Sort by : Status </button>
+                                <button *ngIf="!buttonSort.dateCreate" ngbDropdownItem (click)="sortData('dateCreate',false);  buttonSort['dateCreate']= true" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-up"></i>&ensp;Sort by : Date Create </button>
+                                <button *ngIf="buttonSort.dateCreate" ngbDropdownItem (click)="sortData('dateCreate',true);  buttonSort['dateCreate']= false" style=" color: rgb(117, 117, 117)">  <i class="glyphicon glyphicon-arrow-down"></i>&ensp;Sort by : Date Create </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1 col-lg-1 col-xl-1"></div>
-
             </div>
         </div>
+    </div>
+    <div style="margin-left: 5%; margin-right: 5%;">
+        <h3 style="text-align: center; margin-top: 20%; " *ngIf="dataNotfound"> ไม่พบข้อมูล</h3>
+        <div class="card-mb" *ngFor="let loopdata of data " style="font-size: 10px;  margin: 3%;">
+            <div style="padding: 3%">
+
+                <div class="row" style="padding: 3px;">
+                    <div class="col-xs-12" tyle="text-align: left;padding: 8px;">Case ID :
+                        <font color="#57a503"> {{ loopdata.caseID }}</font>
+                    </div>
+                </div>
+                <div class="row" style="padding: 3px;">
+                    <div class="col-xs-6" tyle="text-align: left;padding: 8px;">Topic :
+                        <font color="#57a503"> {{ loopdata.topic }} </font>
+                    </div>
+                    <div class="col-xs-6" tyle="text-align: left;padding: 8px;">Status :
+                        <font color="red"> {{ loopdata.statusCase }}</font>
+                    </div>
+                </div>
+                <div *ngIf="loopdata.showDetail">
+                    <div class="row" style="padding: 3px;">
+                        <div class="col-xs-12" tyle="text-align: left;padding: 8px;">Date Create :
+                            <font color="#7e7f7e"> {{ loopdata.createDate }}</font>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 3px;">
+                        <div class="col-xs-12" tyle="text-align: left;padding: 8px;">Description :
+                            <font color="#7e7f7e"> {{ loopdata.description }}</font>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px;">
+                        <!-- Image -->
+                        <div class="col-xs-12" style="text-align: left;padding: 1px;">
+                            <ngb-carousel *ngIf="DataImg" style=" margin: 4%;  filter: invert(1); ">
+                                <ng-template *ngFor="let loopImg of loopdata.image" ngbSlide>
+                                    <div class="picsum-img-wrapper" style=" padding: 2%; ">
+                                        <img class="imgShow" [src]="loopImg" style="filter: invert(1)">
+                                    </div>
+                                </ng-template>
+                            </ngb-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button *ngIf="loopdata.showDetail" (click)="loopdata.showDetail = false" class="block" style="background-color: rgb(170, 170, 170); ;font-size: 8px"> Close 
+            <i class="glyphicon glyphicon-circle-arrow-up"></i>  
+        </button>
+            <button *ngIf="!loopdata.showDetail" (click)="loopdata.showDetail = true" class="block" style="background-color: #4F4F4F;color: rgb(255, 255, 255); ;font-size: 8px"> Detail 
+            <i class="	glyphicon glyphicon-circle-arrow-down" style="color: rgb(214, 214, 214); size: 5px; "></i> 
+        </button>
+        </div>
+
+    </div>
+
+
+    <!-- footer -->
+    <div class="footer" style="width: 100%; height: 2%; background-color: rgb(255, 255, 255); ">
+    </div>
+    <!-- footer -->
+
+</div>
+
+<button (click)="reloadTable()" id="clickReloadTable" name="clickReloadTable" hidden>clickReloadTable</button>
+<div class="display-table-data" id="displayTable" *ngIf="showTable">
+    <div class="table-overflow">
+        <div class="responsive-table ">
+            <table id="report" datatable class=" text-center">
+                <thead>
+                    <tr>
+                        <th *ngFor="let loopdata of headers" class="">{{ loopdata }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let loopdata of data">
+                        <td class="text-nowrap">{{ loopdata.No}}</td>
+                        <td class="text-nowrap"><a [routerLink]="" (click)="showImg(loopdata.caseID)">{{ loopdata.caseID }}</a></td>
+                        <td class="text-nowrap "><a [routerLink]="" (click)="showImg(loopdata.caseID)">{{ loopdata.topic }}</a></td>
+                        <td class="text-nowrap ">{{ loopdata.description }}</td>
+                        <td class="text-nowrap ">{{ loopdata.createDate }}</td>
+                        <td class=" text-nowrap">{{ loopdata.caseBy }}</td>
+                        <td class=" text-nowrap">{{ loopdata.statusCase }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <!-- Export -->
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-6 col-lg-7 col-xl-8"></div>
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-3 " style="width: 100%;">
+                <div class="row" style=" margin-left: 5%; margin-right: 5%; ">
+                    <div class="col-6">
+                        <button type="button" class="btn-light  btnSarchCase" (click)="butGoFindCasePage()"><span>Back</span></button>
+                        <!-- <button type="button" class="btn-light  btnSarchCase" onclick="document.getElementById('displayTable').contentWindow.location.reload();"><span>Test</span></button> -->
+                        <!-- <input type="button" placeholder="dsdfsd" id="clickReloadTable" name="clickReloadTable" > -->
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn-light color-ais btnSarchCase" (click)="butExportAsXLSX()"><span>Export</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1 col-xl-1"></div>
+        </div>
+    </div>
+    <!-- Export Excel -->
+</div>
+
+<!-- modal ShowImg -->
+<input type="button" id="clickShowImg" name="clickShowImg" onclick="document.getElementById('modalShowImg').style.display='block'" hidden>
+<div id="modalShowImg" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <label><span onclick="document.getElementById('modalShowImg').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                  </label>
+            <ngb-carousel *ngIf="DataImg" style=" filter: invert(1); margin: 4%;">
+                <ng-template *ngFor="let loopImg of DataImg" ngbSlide>
+                    <div class="picsum-img-wrapper" style=" padding: 8%; ">
+                        <img class="imgShow" [src]="loopImg" alt="Random first slide" style="filter: invert(1)">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+
+        </div>
+    </div>
+</div>
+<!-- modal ShowImg -->
+
+<!-- modal -->
+<input type="button" id="callAlert" name="callAlert" onclick="document.getElementById('modalAlert').style.display='block'" hidden>
+<div id="modalAlert" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px; max-height: 400px; margin-top: auto;">
+        <header class="w3-container color-ais">
+            <span onclick="document.getElementById('modalAlert').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h3>Message</h3>
+        </header>
+        <div class="w3-center"><br>
+            <div style=" max-height: 200px; overflow-x: scroll;">
+                <div class="w3-container" style="margin-bottom: 5%; ">
+                    <h4> {{ msg }} </h4>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+            <button type="button" onclick="document.getElementById('modalAlert').style.display='none'" class="btn-light btnAlert color-ais">
+                <span>OK</span>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<!-- modal loadling -->
+<input type="button" id="modalLoading" name="modalLoading" onclick="document.getElementById('modalLoad').style.display='block'" hidden>
+<input type="button" id="closeModalLoading" name="closeModalLoading" onclick="document.getElementById('modalLoad').style.display='none'" hidden>
+
+<div id="modalLoad" class="w3-modal">
+    <div class="text-center" style="margin-top:20% ;">
+        <div class="spinner-border " style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+<!-- modal loadling -->

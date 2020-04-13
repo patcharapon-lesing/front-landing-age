@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { ReportDetailModel } from '../model/reportDetailModel'
-import { ExcelService } from '../services/excel.services';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-find-case-page',
@@ -10,7 +10,9 @@ import { ExcelService } from '../services/excel.services';
   styleUrls: ['./find-case-page.component.css']
 })
 export class FindCasePageComponent implements OnInit {
-
+  model: NgbDateStruct;
+  today = this.calendar.getToday();
+  dip = false;
   caseIdPattern: string;
   dateFrom: any;
   dateTo: any;
@@ -18,14 +20,15 @@ export class FindCasePageComponent implements OnInit {
   butSubmit: boolean;
   reportDetailModel: ReportDetailModel = new ReportDetailModel();
   constructor(
+    private calendar: NgbCalendar,
     private router: Router,
     private apiService: ApiService,
-    private excelService: ExcelService,
   ) { }
   ngOnInit(): void {
     this.butSubmit = false;
     this.caseIdPattern = "";
   }
+
   ngDoCheck() {
     this.butSubmit = false;
     this.caseId = (document.getElementById('caseId') as HTMLInputElement).value
@@ -39,19 +42,19 @@ export class FindCasePageComponent implements OnInit {
   butGoFindCasePage(): void { this.router.navigate(['']); }
   butGoDetailsPage(): void {
     this.router.navigate(['DetailsPage']);
-    if ( !(document.getElementById('caseId') as HTMLInputElement).value  ) {
-      (document.getElementById('caseId') as HTMLInputElement).value  = '';
+    if (!(document.getElementById('caseId') as HTMLInputElement).value) {
+      (document.getElementById('caseId') as HTMLInputElement).value = '';
     }
     let caseId = (document.getElementById('caseId') as HTMLInputElement).value
     let dateFrom = (document.getElementById('dateFrom') as HTMLInputElement).value
     let dateTo = (document.getElementById('dateTo') as HTMLInputElement).value
     let filesname = "";
-    if ((document.getElementById('caseId') as HTMLInputElement).value.length !== 0) { 
+    if ((document.getElementById('caseId') as HTMLInputElement).value.length !== 0) {
       filesname = caseId
-     } else {
+    } else {
       filesname = dateFrom + "-" + dateTo;
     }
-    this.excelService.excelFileName = filesname;
+    sessionStorage.setItem('excelFileName', filesname);
   }
   onSubmit(caseIdVal: string, caseIdValid: any): void {
     this.alertLoading(true);
@@ -77,7 +80,7 @@ export class FindCasePageComponent implements OnInit {
     if (caseIdValid === false && (document.getElementById('caseId') as HTMLInputElement).value !== "") {
       this.alertCalling("ระบุข้อมูลไม่ถูกต้อง"); return false;
     }
-    if ( (document.getElementById('dateFrom') as HTMLInputElement).value !== ''
+    if ((document.getElementById('dateFrom') as HTMLInputElement).value !== ''
       && (document.getElementById('dateTo') as HTMLInputElement).value !== '') {
       const dateFrom = (document.getElementById('dateFrom') as HTMLInputElement).value;
       const dateTo = (document.getElementById('dateTo') as HTMLInputElement).value;
@@ -91,13 +94,14 @@ export class FindCasePageComponent implements OnInit {
       v_dateTo.setDate(Number(dateTo.toString().substring(0, 2)));
       if (v_dateFrom.getTime() > v_dateTo.getTime()) {
         this.alertCalling("วันที่ไม่ถูกต้อง");
-        
+
         return false;
       } else { return true; }
     }
   }
 
   clearVal(val: string): void {
+    this.model = null;
 
     if (val === "blkDate") {
       (document.getElementById('dateFrom') as HTMLInputElement).value = '';
@@ -124,25 +128,26 @@ export class FindCasePageComponent implements OnInit {
       } else { this.alertCalling("ผิดพลาด! ไม่สามารถทำรายการได้ในขณะนี้"); this.alertLoading(false); }
     });
   }
-  msg : string;
-  alertCalling(msg: string):void {
-    this.msg = msg ;
-    let element: HTMLInputElement = document.getElementById('callAlert') as HTMLInputElement ;
-    element.style.display = "block" ;
+  msg: string;
+  alertCalling(msg: string): void {
+    this.msg = msg;
+    let element: HTMLInputElement = document.getElementById('callAlert') as HTMLInputElement;
+    element.style.display = "block";
     element.click();
     this.alertLoading(false);
   }
 
-  alertLoading(val: boolean):void {
-    if ( val === true ) {
-      let element: HTMLInputElement = document.getElementById('modalLoading') as HTMLInputElement ;
-      element.style.display = "block" ;
+  alertLoading(val: boolean): void {
+    if (val === true) {
+      let element: HTMLInputElement = document.getElementById('modalLoading') as HTMLInputElement;
+      element.style.display = "block";
       element.click();
-    } else if ( val === false ) {
-      let element: HTMLInputElement = document.getElementById('closeModalLoading') as HTMLInputElement ;
-      element.style.display = "none" ;
+    } else if (val === false) {
+      let element: HTMLInputElement = document.getElementById('closeModalLoading') as HTMLInputElement;
+      element.style.display = "none";
       element.click();
     }
   }
+
 
 }

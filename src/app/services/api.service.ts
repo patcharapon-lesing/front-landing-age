@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -6,10 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
+  @HostListener('window:beforeunload')
+  beforReload() {
+    
+  }
+
   reportDetail = new Array();
   reportName = new Array();
-  private baseUrl = 'https://sheltered-dawn-67205.herokuapp.com/'
-  //private baseUrl = 'http://localhost:3000/'
+  reloadData ;
+   private baseUrl = 'https://sheltered-dawn-67205.herokuapp.com/'
+  // private baseUrl = 'http://localhost:3000/'
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,13 +27,16 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   insertDate(data: any) {
+    this.reloadData = data ; 
     const urlApi = 'create';
     return this.http.post(this.baseUrl + urlApi, data);
   }
   searchDate(data: any) {
+    sessionStorage.setItem('dataReload',JSON.stringify(data));
+    this.reloadData = data ; 
     const urlApi = 'search';
     this.reportName = data;
-    return this.http.post(this.baseUrl + urlApi, data);
+    return this.http.post(this.baseUrl + urlApi, data) ;
   }
 
 }

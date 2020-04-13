@@ -28,9 +28,9 @@ export class CreateCasePageComponent implements OnInit {
     this.submitted = false;
     this.registerForm = this.formBuilder.group({
       caseID: [''],
-      caseBy: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      topic: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      caseBy: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
+      topic: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
+      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       statusCase: ['', [Validators.required]],
       image: [this.imgArr]
     });
@@ -53,7 +53,7 @@ export class CreateCasePageComponent implements OnInit {
   handleInputChange(e) {
     var filesAmount = e.target.files.length;
     for (let i = 0; i < filesAmount; i++) {
-      var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+      var file = e.dataTransfer ? e.dataTransfer.files[i] : e.target.files[i];
       var pattern = /image-*/;
       var reader = new FileReader();
       if (!file.type.match(pattern)) {
@@ -70,7 +70,6 @@ export class CreateCasePageComponent implements OnInit {
     this.imgArr.push(this.imageSrc);
     this.butSelImg = true;
   }
-
   butGoCreateCasePage(): void { this.router.navigate(['CreateCasePage']); }
   butGoFindCasePage(): void { this.router.navigate(['']); }
   get f() { return this.registerForm.controls; }

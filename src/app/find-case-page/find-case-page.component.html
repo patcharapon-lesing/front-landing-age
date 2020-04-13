@@ -15,60 +15,59 @@
             </div>
         </div>
     </div>
-
     <div class="divSearch card">
         <span> &nbsp; ค้นหาเคส </span>
         <hr>
-        <div class="row " style=" margin-top: 10%;">
-            <div class="col-xs-6 ">
-                <input type="text" class="btn-light  btnSarchCase" placeholder=" Date From" bsDatepicker id="dateFrom"
-                    name="dateFrom" [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-green'}" value=""
-                    [bsValue]="dateFrom" (click)="clearVal('blkCaseId')" placement="bottom" ng-change="checkInputVal()"
-                    readonly>
+        <div class="DateShowDevice">
+            <div class="row " style=" margin-top: 4%;">
+                <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-size: 12px;  ">Date From</label>
+                        <input type="text" class="btn-light  btnSarchCase" placeholder="Date From" bsDatepicker id="dateFrom" name="dateFrom" [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-green'}" value="" [bsValue]="dateFrom" (click)="clearVal('blkCaseId')"
+                            placement="bottom" ng-change="checkInputVal()" readonly>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-size: 12px;">Date To</label>
+                        <input type="text" class="btn-light  btnSarchCase" placeholder=" Date To" bsDatepicker id="dateTo" [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-green'}" value="" [bsValue]="dateTo" name='dateTo' id="dateTo" pattern="DD/MM/YYYY" (click)="clearVal('blkCaseId')"
+                            placement="bottom" readonly>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <input type="text" class="btn-light  btnSarchCase" placeholder=" Date To" bsDatepicker id="dateTo"
-                    [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-green'}" value=""
-                    [bsValue]="dateTo" name='dateTo' id="dateTo" pattern="DD/MM/YYYY" (click)="clearVal('blkCaseId')"
-                    placement="bottom" readonly>
+            <div style="margin-top: 7%;">
+                <div class="separator" style="color:rgb(187, 187, 187)">or</div>
             </div>
         </div>
-        <div class="row " style=" margin-top: 5%;">
+        <div class="row " style=" margin-top: 2%;">
             <div class="col-xs-12">
-                <input type="text" class="btn-light btnSarchCase" placeholder="  Input Case ID" name='caseId'
-                    id="caseId" #caseId='ngModel' ngModel pattern={{caseIdPattern}} (click)="clearVal('blkDate')">
+                <div class="form-group">
+                    <label style="font-size: 12px;">Case ID</label>
+                    <input type="text" class="btn-light btnSarchCase" placeholder="  Input Case ID" name='caseId' id="caseId" #caseId='ngModel' ngModel pattern={{caseIdPattern}} (click)="clearVal('blkDate')" readonly>
+                </div>
             </div>
         </div>
-
         <div style="margin-bottom: 15%;">
-            <button *ngIf="butSubmit" type="button" class="btn-light btnSubmit color-ais"
-                (click)="onSubmit(caseId.value , caseId.valid)">
-                <span>Submit</span>
+            <button *ngIf="butSubmit" type="button" class="btn-light btnSubmit color-ais" (click)="onSubmit(caseId.value , caseId.valid)">
+                <span>Search</span>
             </button>
-            <button style="border: 2; border-color: black;" *ngIf="!butSubmit" disabled type="button"
-                class="btn-light btnSubmit ">
-                <span>Submit</span>
+            <button style="border: 2; border-color: black;" *ngIf="!butSubmit" disabled type="button" class="btn-light btnSubmit ">
+                <span>Search</span>
             </button>
-            <button type="button" class="btn-light  btnSubmit" (click)="clearVal('blkDate')"
-                (click)="clearVal('blkCaseId')">
+            <button type="button" class="btn-light  btnSubmit" (click)="clearVal('blkDate')" (click)="clearVal('blkCaseId')">
                 <span>Clear</span>
             </button>
         </div>
     </div>
 </div>
 
-
-
 <!-- modal -->
-<input type="button" id="callAlert" name="callAlert"
-    onclick="document.getElementById('modalAlert').style.display='block'" hidden>
+<input type="button" id="callAlert" name="callAlert" onclick="document.getElementById('modalAlert').style.display='block'" hidden>
 <div id="modalAlert" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom"
-        style="max-width:600px; max-height: 400px; margin-top: auto;">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px; max-height: 400px; margin-top: auto;">
         <header class="w3-container color-ais">
-            <span onclick="document.getElementById('modalAlert').style.display='none'"
-                class="w3-button w3-display-topright">&times;</span>
-            <h3>Messeng</h3>
+            <span onclick="document.getElementById('modalAlert').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h3>Message</h3>
         </header>
         <div class="w3-center"><br>
             <div style=" max-height: 200px; overflow-x: scroll;">
@@ -78,8 +77,7 @@
             </div>
         </div>
         <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-            <button type="button" onclick="document.getElementById('modalAlert').style.display='none'"
-                class="btn-light btnAlert color-ais">
+            <button type="button" onclick="document.getElementById('modalAlert').style.display='none'" class="btn-light btnAlert color-ais">
                 <span>OK</span>
             </button>
         </div>
@@ -87,15 +85,12 @@
 </div>
 <!-- modal -->
 
-
 <!-- modal loadling -->
-<input type="button" id="modalLoading" name="modalLoading"
-    onclick="document.getElementById('modalLoad').style.display='block'" hidden>
-<input type="button" id="closeModalLoading" name="closeModalLoading"
-    onclick="document.getElementById('modalLoad').style.display='none'" hidden>
+<input type="button" id="modalLoading" name="modalLoading" onclick="document.getElementById('modalLoad').style.display='block'" hidden>
+<input type="button" id="closeModalLoading" name="closeModalLoading" onclick="document.getElementById('modalLoad').style.display='none'" hidden>
 
 <div id="modalLoad" class="w3-modal">
-    <div class="text-center" style="margin-top: 30%">
+    <div class="text-center" style="margin-top:20% ;">
         <div class="spinner-border " style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>

@@ -11,14 +11,11 @@
 
 <body class="zoom body">
     <div class="gradNav">
-
-        
-
         <a href="#" (click)="onClickBackNav()" style="margin-left: 0;" class="float-sm-left">
             <span class="glyphicon glyphicon-chevron-left" style="color:white;"></span>
-        </a>&nbsp;&nbsp;<span><b>{{ topMenuInfo }}</b></span>
-
-
+        </a>&nbsp;&nbsp;<span style="font-size: 13px;"><b>{{ topMenuInfo }}</b></span>
     </div>
-    <router-outlet></router-outlet>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
 </body>
